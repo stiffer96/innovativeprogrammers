@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>client</title>
+</head>
+<body>
+
+
+	<form>
+		
+		<input type="text" name="name" id="name"><br>
+		<input type="text" name="phone" id="phone"><br>
+		<!-- <input type="email" name="email" id="email"><br>
+		<textarea id="message" placeholder="Enter message here"></textarea>
+	-->
+		<input type="button" name="btn" value="Send" onclick="sendData()">
+	</form>
+	<div id="result"></div>
+
+	<script type="text/javascript">
+		function sendData(){
+			var name = document.getElementById("name").value;
+			var phone = document.getElementById("phone").value;
+			//var email = document.getElementById('email').value;
+			//var message = document.getElementById("message").value;
+			
+			var data = new FormData();
+			data.append("username", name);
+			data.append("password", phone);
+			//data.append("email", email);
+			//data.append("message", message);
+			
+			var http = new XMLHttpRequest();
+			http.open("GET","api/getLeads.php",true);
+			http.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					document.getElementById('result').innerHTML = this.responseText;
+				}
+			};
+			http.send(null);
+		}
+
+
+	</script>
+</body>
+</html>

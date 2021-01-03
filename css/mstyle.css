@@ -1,0 +1,17 @@
+/* header */
+
+.quick-enquiry-btn{
+	border-radius: 10%;
+	border:2px solid lightblue !important;
+	transition: all 2s ease-in-out;
+}
+.quick-enquiry-btn:hover{
+	background-color: lightblue;
+	color: black !important;
+}
+
+@media only screen(min-width: 500px){
+	.header{
+		background: none;
+	}
+}

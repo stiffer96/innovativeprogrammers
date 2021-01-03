@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Panel Login</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
+
+	<link rel="stylesheet" href="dist/css/mstyle.css">
+
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body >
+
+	<div class="main-container">
+				<div class="login-form mx-auto bg-light shadow-xl " style="border-radius: 10%;" >
+					<form class="p-4 mx-auto " >
+						<img src="../images/logo.png" width="50%" style="margin-left:80px">
+						<h4 class="d-flex justify-content-center mt-1">Admin Login </h4>
+						
+ 						<div class=" pt-2 input-group ">
+ 							<div class="input-group-prepend">
+ 								<i class="input-group-text fa fa-user"></i>
+ 							</div>
+ 							<input type="text" class="form-control " name="name" id="name" placeholder="Enter Username" required="">
+ 						</div><br>
+ 						<div class="pt-2 input-group ">
+ 							<div class="input-group-prepend">
+ 								<i class="input-group-text fa fa-key"></i>
+ 							</div>
+ 							<input type="password" class="form-control " name="password" id="password"  placeholder="Enter Password" required="">
+ 						</div>
+ 						
+ 						<div class="pt-3 input-group">
+ 							<input type="button" value="Login" style="font-weight: bold;" class=" form-control btn btn-success btn-block" onclick="loginValidation()">
+ 						</div>
+ 						
+ 					</form>
+ 				</div>
+
+				
+	</div>
+
+	<script type="text/javascript">
+		function loginValidation() { 
+
+            var username = document.getElementById('name').value;
+            var password = document.getElementById('password').value;
+           
+            	if(username=="" ){
+            		alert("Please enter username");
+            	}
+            	else if(password == ""){
+            		alert("Please enter Password");
+            	}
+            	else{   
+            		var http = new XMLHttpRequest();
+  					var url="../api/loginValidation.php"
+  					var data = new  FormData();
+  					data.append("username", username);
+  					data.append("password", password);
+  					
+
+  					http.open("POST",url,true);
+
+  					http.onreadystatechange = function(){	
+  					if(http.readyState == 4 && http.status == 200){
+  						var res = JSON.parse(this.responseText);
+              	if(res.code){
+                
+  							sessionStorage.setItem("username" ,res.result[0].username);
+  							sessionStorage.setItem("email", res.result[0].email);
+               
+  							window.location.href ="index.html";
+  						}
+  						else{
+  							alert("Invalid username and password, please try with correct one !");
+  							document.getElementById("name").value = "";
+  							document.getElementById("password").value ="";
+  						}
+  					}
+  				};
+  				http.send(data);
+  			}
+	}
+
+
+	</script>
+
+
+<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

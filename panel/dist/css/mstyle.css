@@ -1,0 +1,27 @@
+*{
+	margin:0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.main-container{
+	width : 98%;
+	height: 100vh;
+	background: url("http://www.innovativeprogrammers.com/panel/assets/images/background/login-bg.jpg"); 
+	background-size: cover;
+	position: fixed;
+}
+
+
+.login-form{
+		width: 30%; 
+		margin-top: 150px;
+	}
+
+
+@media only screen and (max-width: 600px){
+	.login-form {
+		width: 70%;
+		margin-top:150px;
+	}
+}
